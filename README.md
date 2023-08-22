@@ -1,6 +1,6 @@
-## Affiliate Adventures
+## ProsperMind Learning
 
-This is an education courses platform for affiliate marketers 
+This is an education courses platform for affiliate marketing / web development / well-being , and why not most others things that can be teached online !  
 
 ## Tech Stack
 
