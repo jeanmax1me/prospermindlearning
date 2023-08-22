@@ -37,11 +37,11 @@ img {
 }
 
 .body {
-  background-color: var(--color-background);
-  color: var(--color-foreground);
+  background-color: var(--color-bg);
+  color: var(--color-primary);
 }
 
 .body.dark {
-  background-color: var(--color-background-dark);
-  color: var(--color-foreground-dark);
+  background-color: var(--color-bg-dark);
+  color: var(--color-primary-dark);
 }

@@ -42,9 +42,15 @@ export default function RootLayout({
 
   const theme = currentTheme === 'dark' ? darkTheme : lightTheme;
 
+  if (currentTheme === 'dark') {
+    document.body.classList.add('dark');
+  } else {
+    document.body.classList.remove('dark');
+  }
+
   return (
     <html lang="en" className={alegreya.className}>
-      <body>
+      <body className="body">
         <ThemeProvider theme={theme}>
           <Header theme={currentTheme} toggleTheme={toggleTheme} />
           {children}
