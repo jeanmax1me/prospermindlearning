@@ -1,10 +1,23 @@
+"use client";
+import useFetchCoursesData from "../hooks/useFetchCourseData";
+import CourseGrid from "@/app/components/CourseGrid/page";
+import CourseHeader from "@/app/components/CourseHeader/page";
 
+const CoursePage = () => {
+  const courses = useFetchCoursesData();
 
-
-function page() {
   return (
-    <div>page</div>
-  )
-}
+    <div>
+      <CourseHeader
+        href={"/"}
+        title={"Courses"}
+        description={
+          "Let's start learning useful skills to be successful!"
+        }
+      />
+      <CourseGrid courseData={courses} />
+    </div>
+  );
+};
 
-export default page
+export default CoursePage;
