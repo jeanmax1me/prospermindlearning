@@ -1,7 +1,9 @@
+import { useEffect, useState } from 'react';
 import Button from "@mui/material/Button";
 import scss from "./Header.module.scss";
 import Link from "next/link";
-
+import { useRouter } from 'next/navigation';
+import useUserData, { UserDataType } from "@/app/hooks/useUserData"; // Import the hook
 
 type HeaderProps = {
   theme: 'dark' | 'light';
@@ -9,6 +11,17 @@ type HeaderProps = {
 };
 
 function Header({ theme, toggleTheme }: HeaderProps) {
+  const userData = useUserData(); // Fetch user data using the hook
+  const router = useRouter();
+
+  const handleSignOut = () => {
+    router.push('/logout');
+  }
+
+  const handleSignIn = () => {
+    router.push('/login');
+  }
+
   const getClassName = (baseClassName: string) => {
     return theme === "dark" ? `${baseClassName} ${scss.dark}` : baseClassName;
   };
@@ -23,20 +36,29 @@ function Header({ theme, toggleTheme }: HeaderProps) {
           <li>
             <Link href="/">Home</Link>
           </li>
-          <li>
-            <Link href="/profile">Profile</Link>
-          </li>
+          {userData && userData.isLoggedIn && (
+            <li>
+              <Link href="/profile">Profile</Link>
+            </li>
+          )}
         </ul>
         <div className={getClassName(scss.buttonGroup)}>
-          <Link href="/login">
-            <Button variant="contained">Sign in</Button>
-          </Link>
-          <Link href="/logout">
-            <Button variant="contained">Sign out</Button>
-          </Link>
-          <Link href="/register">
-            <Button variant="contained">Register</Button>
-          </Link>
+          {userData && userData.isLoggedIn ? (
+            <Button variant="contained" onClick={handleSignOut}>
+              Sign out
+            </Button>
+          ) : (
+            <>
+              <Link href="/login">
+                <Button variant="contained" onClick={handleSignIn}>
+                  Login
+                </Button>
+              </Link>
+              <Link href="/register">
+                <Button variant="contained">Register</Button>
+              </Link>
+            </>
+          )}
           <svg
             onClick={toggleTheme}
             xmlns="http://www.w3.org/2000/svg"

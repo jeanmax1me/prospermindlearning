@@ -6,6 +6,8 @@ import './globals.scss'
 import type { Metadata } from 'next'
 import { useState } from 'react';
 import { Alegreya } from 'next/font/google'
+import useUserData from "./hooks/useUserData";
+
 
 
 const darkTheme = createTheme({
@@ -28,7 +30,9 @@ const alegreya = Alegreya({
 export const metadata: Metadata = {
   title: 'ProsperMind Learning',
   description: 'ProsperMind - Learn useful skills online',
+  keywords: "e-learning, courses, learning online",
 }
+
 
 export default function RootLayout({
   children,
@@ -48,11 +52,21 @@ export default function RootLayout({
     document.body.classList.remove('dark');
   }
 
+  const userData = useUserData();
+
   return (
     <html lang="en" className={alegreya.className}>
+      <head>
+        <title>{metadata.title as React.ReactNode}</title>
+        <meta charSet="UTF-8" />
+        <meta name="description" content={metadata.description as string | undefined} />
+        <meta name="keywords" content={metadata.keywords as string | undefined} />
+        <meta name="author" content="jeanmax1me" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body className="body">
         <ThemeProvider theme={theme}>
-          <Header theme={currentTheme} toggleTheme={toggleTheme} />
+          <Header userData={userData} theme={currentTheme} toggleTheme={toggleTheme} />
           {children}
         </ThemeProvider>
       </body>
